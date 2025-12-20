@@ -3,7 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Retired dad vibe-coding small web apps and tools for everyday life."
+    />
     <title>Chung Hsu | Projects</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link
+      rel="canonical"
+      href="https://clhsu66.github.io/github_landing_page/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Chung Hsu Projects" />
+    <meta property="og:title" content="Chung Hsu | Projects" />
+    <meta
+      property="og:description"
+      content="Retired dad vibe-coding small web apps and tools for everyday life."
+    />
+    <meta
+      property="og:url"
+      content="https://clhsu66.github.io/github_landing_page/"
+    />
+    <meta
+      property="og:image"
+      content="https://clhsu66.github.io/github_landing_page/coding-motivation-banner.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chung Hsu | Projects" />
+    <meta
+      name="twitter:description"
+      content="Retired dad vibe-coding small web apps and tools for everyday life."
+    />
+    <meta
+      name="twitter:image"
+      content="https://clhsu66.github.io/github_landing_page/coding-motivation-banner.jpg"
+    />
     <link rel="stylesheet" href="style.css?v=2" />
   </head>
   <body>
@@ -41,6 +76,17 @@
               >
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- Motivation Banner -->
+      <section class="section section-banner">
+        <div class="container banner-wrapper">
+          <img
+            src="coding-motivation-banner.jpg"
+            alt="Graphic reading: Coding experience? No problem! You can't teach an old dog new tricks, or can you?"
+            class="banner-image"
+          />
         </div>
       </section>
 
@@ -270,7 +316,12 @@
           </p>
 
           <div class="about-grid">
-            <div>
+            <div class="about-main">
+              <img
+                src="profile-photo.jpg"
+                alt="Portrait of the site owner."
+                class="about-photo"
+              />
               <h3>Summary</h3>
               <p>
                 I'm a retired dad spending time on things I never had the chance
@@ -356,6 +407,35 @@
       if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
       }
+
+      // Highlight active nav link on scroll
+      const navLinks = document.querySelectorAll(".nav a[href^='#']");
+      const sections = Array.from(document.querySelectorAll("main section[id]"));
+
+      function setActiveNavLink() {
+        if (!sections.length || !navLinks.length) return;
+
+        const scrollPosition = window.scrollY + 90;
+        let currentId = sections[0].id;
+
+        for (const section of sections) {
+          if (scrollPosition >= section.offsetTop) {
+            currentId = section.id;
+          }
+        }
+
+        navLinks.forEach((link) => {
+          const targetId = link.getAttribute("href")?.slice(1);
+          if (targetId === currentId) {
+            link.classList.add("is-active");
+          } else {
+            link.classList.remove("is-active");
+          }
+        });
+      }
+
+      window.addEventListener("load", setActiveNavLink);
+      window.addEventListener("scroll", setActiveNavLink);
     </script>
   </body>
 </html>
